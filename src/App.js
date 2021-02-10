@@ -39,11 +39,10 @@ function App() {
     let totalExpenses = 0
     entries.map(entry => {
       if (entry.isExpense) {
-        return totalExpenses += parseFloat(entry.value)
+        return totalExpenses += Number(entry.value)
       }
-      return totalIncome += parseFloat(entry.value)
+      return totalIncome += Number(entry.value)
     })
-    console.log("income ", totalIncome, "expenses ", totalExpenses)
 
     setTotalIncome(totalIncome)
     setTotalExpenses(totalExpenses)
@@ -55,7 +54,6 @@ function App() {
     setEntries(result)
   }
   function editEntry(id) {
-    console.log(`edit entry with id ${id}`);
     if (id) {
       const index = entries.findIndex((entry) => entry.id === id);
       const entry = entries[index];
@@ -74,7 +72,6 @@ function App() {
       value,
       isExpense,
     })
-    console.log("🚀 ~ file: App.js ~ line 58 ~ addEntry ~ result", result)
     setEntries(result)
     resetEntry()
   }
