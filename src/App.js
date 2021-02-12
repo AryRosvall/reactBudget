@@ -1,17 +1,19 @@
 
 import { useEffect, useState } from 'react';
 import { Container } from 'semantic-ui-react';
+import { useSelector } from "react-redux";
+
 import MainHeader from './components/MainHeader'
 import NewEntryForm from './components/NewEntryForm'
-import './App.css';
 import DisplayBalance from './components/DisplayBalance';
 import DisplayBalances from './components/DisplayBalances';
 import EntryLines from './components/EntryLines';
 import ModalEdit from './components/ModalEdit';
 
+import './App.css';
+
 function App() {
 
-  const [entries, setEntries] = useState(initialEntries)
   const [description, setDescription] = useState('')
   const [value, setValue] = useState('')
   const [isExpense, setIsExpense] = useState(true)
@@ -21,6 +23,8 @@ function App() {
   const [totalExpenses, setTotalExpenses] = useState(0)
   const [total, setTotal] = useState(0)
 
+  const entries = useSelector(state => state.entries)
+
   useEffect(() => {
     if (!isOpen && entryId) {
       const index = entries.findIndex((entry) => entry.id === entryId);
@@ -28,7 +32,7 @@ function App() {
       newEntries[index].description = description;
       newEntries[index].value = value;
       newEntries[index].isExpense = isExpense;
-      setEntries(newEntries);
+      //setEntries(newEntries);
       resetEntry();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,10 +53,6 @@ function App() {
     setTotal(totalIncome - totalExpenses)
   }, [entries])
 
-  const deleteEntry = (id) => {
-    const result = entries.filter(entry => entry.id !== id)
-    setEntries(result)
-  }
   function editEntry(id) {
     if (id) {
       const index = entries.findIndex((entry) => entry.id === id);
@@ -72,7 +72,7 @@ function App() {
       value,
       isExpense,
     })
-    setEntries(result)
+    //setEntries(result)
     resetEntry()
   }
 
@@ -89,7 +89,7 @@ function App() {
       <DisplayBalances income={totalIncome} expenses={totalExpenses} />
       <MainHeader title="History" type="h3" />
 
-      <EntryLines entries={entries} deleteEntry={deleteEntry} editEntry={editEntry} />
+      <EntryLines entries={entries} editEntry={editEntry} />
 
       <MainHeader title="Add new transaction" type="h3" />
       <NewEntryForm
@@ -117,31 +117,3 @@ function App() {
 }
 
 export default App;
-
-var initialEntries = [
-  {
-    id: 1,
-    description: "Work income",
-    value: "1000.00",
-    isExpense: false
-  },
-  {
-    id: 2,
-    description: "Water bill",
-    value: 200.00,
-    isExpense: true
-  },
-  {
-    id: 3,
-    description: "Rent",
-    value: 2000.00,
-    isExpense: true
-  },
-  {
-    id: 4,
-    description: "Power bill",
-    value: 100.00,
-    isExpense: true
-  },
-
-]
