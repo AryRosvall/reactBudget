@@ -1,14 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from "uuid";
+import { addEntryRedux, updateEntryRedux } from '../actions/entries.actions'
+import { closeModal } from '../actions/modals.actions';
 
-import { addEntryRedux } from '../actions/entries.actions'
-
-function useEntryDetails() {
-  const [description, setDescription] = useState('')
-  const [value, setValue] = useState('')
-  const [isExpense, setIsExpense] = useState(true)
+function useEntryDetails(desc = '', val = '', isExp = '') {
+  const [description, setDescription] = useState(desc)
+  const [value, setValue] = useState(val)
+  const [isExpense, setIsExpense] = useState(isExp)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    setDescription(desc)
+    setValue(val)
+    setIsExpense(isExp)
+  }, [desc, val, isExp])
 
   const addEntry = () => {
     dispatch(addEntryRedux({
@@ -19,6 +25,21 @@ function useEntryDetails() {
     }))
 
     resetEntry()
+  }
+
+  const updateEntry = (id) => {
+    dispatch(
+      updateEntryRedux(
+        id,
+        {
+          id,
+          description,
+          value,
+          isExpense,
+        }
+      )
+    )
+    dispatch(closeModal())
   }
 
   const resetEntry = () => {
@@ -34,7 +55,8 @@ function useEntryDetails() {
     setValue,
     isExpense,
     setIsExpense,
-    addEntry
+    addEntry,
+    updateEntry
   }
 }
 
