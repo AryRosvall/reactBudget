@@ -8,7 +8,7 @@ function DisplayBalance({ color = "black", title, value, size = "tiny" }) {
       <Statistic.Label style={{ textAlign: "left" }}>
         {title}
       </Statistic.Label>
-      <Statistic.Value>${value}</Statistic.Value>
+      <Statistic.Value>${isNaN(value) ? 0 : value}</Statistic.Value>
     </Statistic>
   )
 }

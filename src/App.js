@@ -1,8 +1,8 @@
-
 import { useEffect, useState } from 'react';
 import { Container } from 'semantic-ui-react';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
+import { getAllEntries } from './actions/entries.actions';
 import MainHeader from './components/MainHeader'
 import NewEntryForm from './components/NewEntryForm'
 import DisplayBalance from './components/DisplayBalance';
@@ -20,12 +20,13 @@ function App() {
   const [entry, setEntry] = useState()
   const { isOpen, id } = useSelector(state => state.modals)
   const entries = useSelector(state => state.entries)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     const index = entries.findIndex(entry => entry.id === id)
     setEntry(entries[index])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isOpen, id]);
+
+  }, [isOpen, id, entries]);
 
   useEffect(() => {
     let totalIncome = 0
@@ -42,6 +43,9 @@ function App() {
     setTotal(totalIncome - totalExpenses)
   }, [entries])
 
+  useEffect(() => {
+    dispatch(getAllEntries())
+  }, [dispatch])
 
   return (
     <Container>

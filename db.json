@@ -1,0 +1,42 @@
+{
+  "entries": [
+    {
+      "id": "8b2741ef-ea80-4797-a2e8-96c1b1baa0cc",
+      "description": "slsl"
+    },
+    {
+      "id": "a4d7ec4f-1be8-476b-a759-2fc73c46675f",
+      "description": "dfdfg"
+    },
+    {
+      "id": "f3189e6f-322a-4bac-8594-ef648e56244c",
+      "description": "sldkf"
+    },
+    {
+      "id": "94f708b6-6048-480d-a36a-3b6f8348d728",
+      "description": "dlfkdfjfldfjd"
+    }
+  ],
+  "values": [
+    {
+      "id": "8b2741ef-ea80-4797-a2e8-96c1b1baa0cc",
+      "isExpense": true,
+      "value": "2245"
+    },
+    {
+      "id": "a4d7ec4f-1be8-476b-a759-2fc73c46675f",
+      "isExpense": false,
+      "value": "243"
+    },
+    {
+      "id": "f3189e6f-322a-4bac-8594-ef648e56244c",
+      "isExpense": true,
+      "value": "245"
+    },
+    {
+      "id": "94f708b6-6048-480d-a36a-3b6f8348d728",
+      "isExpense": false,
+      "value": "2456"
+    }
+  ]
+}
